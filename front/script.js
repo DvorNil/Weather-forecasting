@@ -22,14 +22,17 @@ async function analyzeWeather() {
         document.getElementById('predictedTemp').innerText = data.prediction;
         
         const tbody = document.getElementById('historyBody');
+
         tbody.innerHTML = data.history.map(day => `
             <tr>
                 <td>${day.date}</td>
-                <td>${day.temp_mean}°C</td>
-                <td>${day.temp_min} / ${day.temp_max}</td>
+                <td>${Math.round(day.temp_mean)}°C</td>
+                <td>${Math.round(day.temp_min)} / ${Math.round(day.temp_max)}°C</td>
                 <td>${day.rain} мм</td>
             </tr>
         `).join('');
+
+        document.getElementById('predictedTemp').innerText = Math.round(data.prediction);
 
         results.classList.remove('hidden');
     } catch (e) {
@@ -58,17 +61,17 @@ async function runTest() {
                 if (!res.ok) throw new Error(data.error);
                 
                 // 1. Показываем карточки сравнения
-                document.getElementById('resPred').innerText = data.predicted + "°C";
-                document.getElementById('resActual').innerText = (data.actual !== null ? data.actual : "Н/Д") + "°C";
-                document.getElementById('resError').innerText = "Погрешность алгоритма: " + data.error + "°C";
+                document.getElementById('resPred').innerText = Math.round(data.predicted) + "°C";
+                document.getElementById('resActual').innerText = (data.actual !== null ? Math.round(data.actual) : "Н/Д") + "°C";
+                document.getElementById('resError').innerText = "Погрешность алгоритма: " + Math.round(data.error) + "°C";
 
                 // 2. Отрисовываем историю
                 const tbody = document.getElementById('testHistoryBody');
                 tbody.innerHTML = data.history.map(day => `
                     <tr>
                         <td>${day.date}</td>
-                        <td>${day.temp_mean}°C</td>
-                        <td>${day.temp_min} / ${day.temp_max}</td>
+                        <td>${Math.round(day.temp_mean)}°C</td>
+                        <td>${Math.round(day.temp_min)} / ${Math.round(day.temp_max)}°C</td>
                         <td>${day.rain} мм</td>
                     </tr>
                 `).join('');
