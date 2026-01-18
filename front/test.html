@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест точности — Weather AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Тест точности</h1>
+            <a href="/" style="color: var(--primary); text-decoration: none;">← Назад к прогнозу</a>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Город">
+            <input type="date" id="dateInput">
+            <button onclick="runTest()">Проверить</button>
+        </div>
+
+        <div id="testResult" class="hidden">
+            <div class="comparison-grid">
+                <div class="card">
+                    <h4>Прогноз алгоритма</h4>
+                    <div id="resPred" style="font-size: 2rem; color: #4a90e2; font-weight: bold;"></div>
+                </div>
+                <div class="card">
+                    <h4>Реальный факт</h4>
+                    <div id="resActual" style="font-size: 2rem; color: #2ecc71; font-weight: bold;"></div>
+                </div>
+            </div>
+            <div id="resError" class="error-info"></div>
+
+            <div style="margin-top: 30px;">
+                <h3>Данные за неделю до этой даты:</h3>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">(На основе этих данных был сделан расчет)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Средняя</th>
+                            <th>Мин/Макс</th>
+                            <th>Осадки</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testHistoryBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

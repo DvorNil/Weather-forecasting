@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Weather Analytics</h1>
+            <a href="/test" style="color: var(--primary); text-decoration: none;">Проверить алгоритм →</a>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Город (напр. Москва)">
+            <button onclick="analyzeWeather()">Анализ</button>
+        </div>
+
+        <div id="loading" class="hidden">Загрузка данных...</div>
+
+        <div id="resultArea" class="hidden">
+            <div class="forecast-card">
+                <h2 id="cityName">Город</h2>
+                <div class="temp-main"><span id="predictedTemp">--</span>°C</div>
+                <p>Прогноз на завтра</p>
+            </div>
+
+            <h3>История за 7 дней</h3>
+            <table>
+                <thead>
+                    <tr><th>Дата</th><th>Средняя</th><th>Мин/Макс</th><th>Осадки</th></tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
