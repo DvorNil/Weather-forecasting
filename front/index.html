@@ -2,39 +2,62 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Weather AI</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather AI - Прогноз</title>
+    <link rel="stylesheet" href="/front/style.css">
 </head>
 <body>
     <div class="app-container">
         <header>
             <h1>Weather Analytics</h1>
-            <a href="/test" style="color: var(--primary); text-decoration: none;">Проверить алгоритм →</a>
+            <a href="/test" class="nav-link">Проверить алгоритм →</a>
         </header>
 
         <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Город (напр. Москва)">
+            <input type="text" id="cityInput" placeholder="Введите город (напр. Москва)">
             <button onclick="analyzeWeather()">Анализ</button>
         </div>
 
-        <div id="loading" class="hidden">Загрузка данных...</div>
+        <div id="loading" class="hidden">Загрузка данных и работа ИИ...</div>
 
         <div id="resultArea" class="hidden">
-            <div class="forecast-card">
-                <h2 id="cityName">Город</h2>
-                <div class="temp-main"><span id="predictedTemp">--</span>°C</div>
-                <p>Прогноз на завтра</p>
+            <h2 id="cityName" style="text-align: center; margin-bottom: 20px; color: var(--text);">Город</h2>
+            
+            <div class="forecast-grid">
+                <div class="forecast-card">
+                    <div class="card-label">Температура</div>
+                    <div class="temp-main"><span id="predictedTemp">--</span>°C</div>
+                    <p>Прогноз на завтра</p>
+                </div>
+
+                <div class="forecast-card humidity">
+                    <div class="card-label">Влажность</div>
+                    <div class="hum-main"><span id="predictedHumidity">--</span>%</div>
+                    <p>Ожидаемый уровень</p>
+                </div>
             </div>
 
-            <h3>История за 7 дней</h3>
-            <table>
-                <thead>
-                    <tr><th>Дата</th><th>Средняя</th><th>Мин/Макс</th><th>Осадки</th></tr>
-                </thead>
-                <tbody id="historyBody"></tbody>
-            </table>
+            <div class="history-section">
+                <h3>История за последние 7 дней</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Средняя t°</th>
+                                <th>Мин / Макс</th>
+                                <th>Влажность</th> 
+                                <th>Осадки</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="/front/script.js"></script>
 </body>
 </html>
