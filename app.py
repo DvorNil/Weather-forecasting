@@ -121,7 +121,7 @@ def analyze():
     if not loc: return jsonify({"error": "City not found"}), 404
     
     # Get last 10 days for better trend analysis
-    end = datetime.now().date() - timedelta(days=1) # Yesterday as last known point
+    end = datetime.now().date() # Yesterday as last known point
     start = end - timedelta(days=9) 
     
     history = get_weather_data(loc['latitude'], loc['longitude'], start, end)
