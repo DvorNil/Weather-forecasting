@@ -10,14 +10,24 @@ function switchMode(mode) {
 
 async function handleAction() {
     const city = document.getElementById('cityInput').value;
-    if (!city) return alert("Enter city name");
+    const actionBtn = document.getElementById('actionBtn');
+    if (!city) return alert("Please enter a city");
 
-    toggleLoading(true);
+    // Start Loading State
+    actionBtn.disabled = true;
+    const originalText = actionBtn.innerText;
+    actionBtn.innerText = "Processing...";
+
     const endpoint = currentMode === 'forecast' ? '/api/analyze' : '/api/test_algo';
     const payload = { city };
+    
     if (currentMode === 'test') {
         payload.date = document.getElementById('dateInput').value;
-        if (!payload.date) { toggleLoading(false); return alert("Select a date"); }
+        if (!payload.date) {
+            actionBtn.disabled = false;
+            actionBtn.innerText = originalText;
+            return alert("Select a date for testing");
+        }
     }
 
     try {
@@ -28,20 +38,28 @@ async function handleAction() {
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
-
         renderUI(data);
-    } catch (e) { alert(e.message); }
-    finally { toggleLoading(false); }
+    } catch (e) { 
+        alert(e.message); 
+    } finally {
+        // Reset Loading State
+        actionBtn.disabled = false;
+        actionBtn.innerText = originalText;
+    }
 }
 
 function renderUI(data) {
-    document.getElementById('displayCity').innerText = data.city;
+    document.getElementById('cityName').innerText = data.city;
     const isTest = currentMode === 'test';
-    const p = isTest ? data.predicted : {temp: data.temp_pred, hum: data.hum_pred, rain: data.rain_pred};
+    const p = isTest ? data.predicted : {temp: data.prediction, hum: data.humidity_prediction, rain: data.rain_prediction};
     
     document.getElementById('resTemp').innerText = Math.round(p.temp);
     document.getElementById('resHum').innerText = Math.round(p.hum);
-    document.getElementById('resRain').innerText = p.rain;
+    document.getElementById('resRain').innerText = p.rain || 0;
+
+    const accPanel = document.getElementById('accuracyPanel');
+    accPanel.classList.toggle('hidden', !isTest);
+    if (isTest) document.getElementById('accuracyScore').innerText = data.accuracy + "%";
 
     ['Temp', 'Hum', 'Rain'].forEach(key => {
         const box = document.getElementById(`act${key}Box`);
@@ -51,18 +69,13 @@ function renderUI(data) {
         }
     });
 
-    document.getElementById('historyBody').innerHTML = data.history.map(day => `
-        <tr>
-            <td>${day.date}</td>
-            <td>${Math.round(day.temp_mean)}°C</td>
-            <td>${Math.round(day.temp_min)} / ${Math.round(day.temp_max)}°C</td>
-            <td>${Math.round(day.humidity)}%</td>
-            <td>${day.rain} mm</td>
+    document.getElementById('historyBody').innerHTML = (data.history || []).map(day => `
+        <tr style="border-bottom: 1px solid #f1f5f9;">
+            <td style="padding: 12px;">${day.date}</td>
+            <td style="padding: 12px;">${Math.round(day.temp_mean)}°C</td>
+            <td style="padding: 12px;">${Math.round(day.humidity)}%</td>
+            <td style="padding: 12px;">${day.rain} mm</td>
         </tr>`).join('');
+    
     document.getElementById('resultArea').classList.remove('hidden');
-}
-
-function toggleLoading(isLoading) {
-    document.getElementById('loading').classList.toggle('hidden', !isLoading);
-    if (isLoading) document.getElementById('resultArea').classList.add('hidden');
 }

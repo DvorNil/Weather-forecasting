@@ -2,59 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather AI Analytics</title>
     <link rel="stylesheet" href="/front/style.css">
 </head>
 <body>
     <div class="app-container">
-        <header>
-            <h1>Weather AI Analytics</h1>
-            <div class="mode-switch">
-                <button onclick="switchMode('forecast')" id="btnForecast" class="active">Live Forecast</button>
-                <button onclick="switchMode('test')" id="btnTest">Test Algorithm</button>
+        <header style="text-align: center;">
+            <h1 style="color: var(--text); margin-bottom: 20px;">Weather AI Analytics</h1>
+            
+            <div class="mode-toggle-pane">
+                <button onclick="switchMode('forecast')" id="btnForecast" class="mode-btn active">Live Forecast</button>
+                <button onclick="switchMode('test')" id="btnTest" class="mode-btn">Algorithm Test</button>
             </div>
         </header>
 
-        <div class="search-panel">
+        <div class="search-box">
             <input type="text" id="cityInput" placeholder="Enter city name...">
             <input type="date" id="dateInput" class="hidden">
-            <button onclick="handleAction()" id="actionBtn" class="btn-action">Analyze</button>
+            <button onclick="handleAction()" id="actionBtn" class="btn-analyze">Analyze</button>
         </div>
 
-        <div id="loading" class="hidden">Computing AI Insights...</div>
-
         <div id="resultArea" class="hidden">
-            <h2 id="displayCity" style="text-align: center; color: #2c3e50;">City Name</h2>
-            
+            <h2 id="cityName" style="text-align: center; color: var(--text);">City</h2>
+
             <div class="forecast-grid">
                 <div class="forecast-card temp-card">
-                    <div class="card-label">Temperature</div>
-                    <div class="value-main"><span id="resTemp">--</span>°C</div>
-                    <div id="actTempBox" class="actual-val hidden">Actual: <span id="actTemp">--</span>°C</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Temperature</div>
+                    <div style="font-size: 2.8rem; font-weight: 800;"><span id="resTemp">--</span>°C</div>
+                    <div id="actTempBox" class="hidden" style="border-top:1px solid rgba(255,255,255,0.3); margin-top:10px; padding-top:5px;">Actual: <span id="actTemp">--</span>°C</div>
                 </div>
                 <div class="forecast-card hum-card">
-                    <div class="card-label">Humidity</div>
-                    <div class="value-main"><span id="resHum">--</span>%</div>
-                    <div id="actHumBox" class="actual-val hidden">Actual: <span id="actHum">--</span>%</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Humidity</div>
+                    <div style="font-size: 2.8rem; font-weight: 800;"><span id="resHum">--</span>%</div>
+                    <div id="actHumBox" class="hidden" style="border-top:1px solid rgba(255,255,255,0.3); margin-top:10px; padding-top:5px;">Actual: <span id="actHum">--</span>%</div>
                 </div>
                 <div class="forecast-card rain-card">
-                    <div class="card-label">Precipitation</div>
-                    <div class="value-main"><span id="resRain">--</span> mm</div>
-                    <div id="actRainBox" class="actual-val hidden">Actual: <span id="actRain">--</span> mm</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Precipitation</div>
+                    <div style="font-size: 2.8rem; font-weight: 800;"><span id="resRain">--</span> mm</div>
+                    <div id="actRainBox" class="hidden" style="border-top:1px solid rgba(255,255,255,0.3); margin-top:10px; padding-top:5px;">Actual: <span id="actRain">--</span> mm</div>
                 </div>
             </div>
 
-            <div class="history-section">
-                <h3>Historical Insight (Last 7 Days)</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr><th>Date</th><th>Mean Temp</th><th>Min/Max</th><th>Humidity</th><th>Rain</th></tr>
-                        </thead>
-                        <tbody id="historyBody"></tbody>
-                    </table>
-                </div>
+            <div id="accuracyPanel" class="accuracy-container hidden">
+                <span class="accuracy-text">AI Prediction Accuracy</span>
+                <span id="accuracyScore" class="accuracy-value">--%</span>
+                <div class="dashed-separator"></div>
+            </div>
+            
+            <div class="history-section" style="margin-top: 30px;">
+                <h3 style="text-align: center; color: #64748b;">Historical Insight (Last 7 Days)</h3>
+                <table style="width: 100%; text-align: center; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f8fafc; color: #64748b;">
+                            <th style="padding: 12px;">Date</th>
+                            <th style="padding: 12px;">Mean Temp</th>
+                            <th style="padding: 12px;">Humidity</th>
+                            <th style="padding: 12px;">Rain</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody"></tbody>
+                </table>
             </div>
         </div>
     </div>
