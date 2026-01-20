@@ -179,7 +179,11 @@ def test_algo():
             "hum": WeatherEngine.predict_humidity(history),
             "rain": WeatherEngine.predict_rain(history)
         },
-        "actual": actual,
+        "actual": {
+            "temp": actual['temp_mean'],
+            "hum": actual['humidity'],
+            "rain": actual['rain'] 
+        },
         "accuracy": round(accuracy, 1),
         "history": history[::-1]
     })

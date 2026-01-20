@@ -1,5 +1,13 @@
 let currentMode = 'forecast';
 
+document.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('dateInput');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('max', today);
+    dateInput.value = today;
+});
+
+
 function switchMode(mode) {
     currentMode = mode;
     document.getElementById('dateInput').classList.toggle('hidden', mode === 'forecast');
