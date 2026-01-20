@@ -3,58 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather AI - Insights</title>
+    <title>Weather AI Analytics</title>
     <link rel="stylesheet" href="/front/style.css">
 </head>
 <body>
     <div class="app-container">
         <header>
-            <h1>Weather Analytics</h1>
-            <p class="subtitle">AI-Powered Forecasts</p>
+            <h1>Weather AI Analytics</h1>
+            <div class="mode-switch">
+                <button onclick="switchMode('forecast')" id="btnForecast" class="active">Live Forecast</button>
+                <button onclick="switchMode('test')" id="btnTest">Test Algorithm</button>
+            </div>
         </header>
 
-        <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Enter city (e.g. London)">
-            <button onclick="analyzeWeather()">Analyze</button>
+        <div class="search-panel">
+            <input type="text" id="cityInput" placeholder="Enter city name...">
+            <input type="date" id="dateInput" class="hidden">
+            <button onclick="handleAction()" id="actionBtn" class="btn-action">Analyze</button>
         </div>
 
-        <div id="loading" class="hidden">Fetching data & computing forecast...</div>
+        <div id="loading" class="hidden">Computing AI Insights...</div>
 
         <div id="resultArea" class="hidden">
-            <h2 id="cityName" class="city-display">City</h2>
+            <h2 id="displayCity" style="text-align: center; color: #2c3e50;">City Name</h2>
             
             <div class="forecast-grid">
-                <div class="forecast-card temperature">
+                <div class="forecast-card temp-card">
                     <div class="card-label">Temperature</div>
-                    <div class="value-main"><span id="predictedTemp">--</span>°C</div>
-                    <p>Tomorrow's Forecast</p>
+                    <div class="value-main"><span id="resTemp">--</span>°C</div>
+                    <div id="actTempBox" class="actual-val hidden">Actual: <span id="actTemp">--</span>°C</div>
                 </div>
-
-                <div class="forecast-card humidity">
+                <div class="forecast-card hum-card">
                     <div class="card-label">Humidity</div>
-                    <div class="value-main"><span id="predictedHumidity">--</span>%</div>
-                    <p>Expected Level</p>
+                    <div class="value-main"><span id="resHum">--</span>%</div>
+                    <div id="actHumBox" class="actual-val hidden">Actual: <span id="actHum">--</span>%</div>
                 </div>
-
-                <div class="forecast-card rain">
+                <div class="forecast-card rain-card">
                     <div class="card-label">Precipitation</div>
-                    <div class="value-main"><span id="predictedRain">--</span> mm</div>
-                    <p>Predicted Volume</p>
+                    <div class="value-main"><span id="resRain">--</span> mm</div>
+                    <div id="actRainBox" class="actual-val hidden">Actual: <span id="actRain">--</span> mm</div>
                 </div>
             </div>
 
             <div class="history-section">
-                <h3>Last 7 Days History</h3>
+                <h3>Historical Insight (Last 7 Days)</h3>
                 <div class="table-wrapper">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Avg Temp</th>
-                                <th>Min/Max</th>
-                                <th>Humidity</th> 
-                                <th>Rain</th>
-                            </tr>
+                            <tr><th>Date</th><th>Mean Temp</th><th>Min/Max</th><th>Humidity</th><th>Rain</th></tr>
                         </thead>
                         <tbody id="historyBody"></tbody>
                     </table>
