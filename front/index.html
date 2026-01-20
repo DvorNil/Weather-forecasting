@@ -1,63 +1,67 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather AI - Прогноз</title>
+    <title>Weather AI - Insights</title>
     <link rel="stylesheet" href="/front/style.css">
 </head>
 <body>
     <div class="app-container">
         <header>
             <h1>Weather Analytics</h1>
-            <a href="/test" class="nav-link">Проверить алгоритм →</a>
+            <p class="subtitle">AI-Powered Forecasts</p>
         </header>
 
         <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Введите город (напр. Москва)">
-            <button onclick="analyzeWeather()">Анализ</button>
+            <input type="text" id="cityInput" placeholder="Enter city (e.g. London)">
+            <button onclick="analyzeWeather()">Analyze</button>
         </div>
 
-        <div id="loading" class="hidden">Загрузка данных и работа ИИ...</div>
+        <div id="loading" class="hidden">Fetching data & computing forecast...</div>
 
         <div id="resultArea" class="hidden">
-            <h2 id="cityName" style="text-align: center; margin-bottom: 20px; color: var(--text);">Город</h2>
+            <h2 id="cityName" class="city-display">City</h2>
             
             <div class="forecast-grid">
-                <div class="forecast-card">
-                    <div class="card-label">Температура</div>
-                    <div class="temp-main"><span id="predictedTemp">--</span>°C</div>
-                    <p>Прогноз на завтра</p>
+                <div class="forecast-card temperature">
+                    <div class="card-label">Temperature</div>
+                    <div class="value-main"><span id="predictedTemp">--</span>°C</div>
+                    <p>Tomorrow's Forecast</p>
                 </div>
 
                 <div class="forecast-card humidity">
-                    <div class="card-label">Влажность</div>
-                    <div class="hum-main"><span id="predictedHumidity">--</span>%</div>
-                    <p>Ожидаемый уровень</p>
+                    <div class="card-label">Humidity</div>
+                    <div class="value-main"><span id="predictedHumidity">--</span>%</div>
+                    <p>Expected Level</p>
+                </div>
+
+                <div class="forecast-card rain">
+                    <div class="card-label">Precipitation</div>
+                    <div class="value-main"><span id="predictedRain">--</span> mm</div>
+                    <p>Predicted Volume</p>
                 </div>
             </div>
 
             <div class="history-section">
-                <h3>История за последние 7 дней</h3>
+                <h3>Last 7 Days History</h3>
                 <div class="table-wrapper">
                     <table>
                         <thead>
                             <tr>
-                                <th>Дата</th>
-                                <th>Средняя t°</th>
-                                <th>Мин / Макс</th>
-                                <th>Влажность</th> 
-                                <th>Осадки</th>
+                                <th>Date</th>
+                                <th>Avg Temp</th>
+                                <th>Min/Max</th>
+                                <th>Humidity</th> 
+                                <th>Rain</th>
                             </tr>
                         </thead>
-                        <tbody id="historyBody">
-                            </tbody>
+                        <tbody id="historyBody"></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="/front/script.js"></script>
 </body>
 </html>
