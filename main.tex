@@ -17,7 +17,7 @@
 % --- Document Information ---
 \title{Weather AI Analytics: A Lightweight Framework for Localized Forecasting via Linear Regression and Exponentially Weighted Moving Averages}
 \author{Artsiom Hancharenka, Nil Dvorakovskiy \\ \small BSU FAMCS, $3^{rd}$ group}
-\date{} % Date removed as requested
+\date{} 
 
 \begin{document}
 
@@ -83,8 +83,15 @@ A = \max(0, 100 - |T_{pred} - T_{actual}| \times 10)
 \end{equation}
 While scientific models often use Mean Absolute Error, we employ a ``Trust Score.'' A multiplier of 10 means every $1^\circ\text{C}$ of error reduces the AI's score by 10\%. This provides a clear benchmark: a $2^\circ\text{C}$ error is 80\% Accuracy (Good), whereas a $5^\circ\text{C}$ error results in 50\% Accuracy, signaling a failure of the linear trend to capture that day's atmospheric shifts.
 
+\section{Pros and Cons Review}
+The framework succeeds in offering an \textbf{explainable} and \textbf{low-latency} alternative to traditional modeling. Its strength lies in its transparency; users can trace the linear slope back to historical data. 
+
+A significant advantage of this technology is its \textbf{High Portability and Edge Intelligence}. Because the algorithms rely on simple arithmetic rather than heavy matrix operations or GPU-intensive libraries, they can be deployed directly on low-power, 8-bit or 16-bit microcomputers (such as thermometer chips or Arduino-based controllers). These standalone devices can perform local forecasting autonomously without any internet connection. By storing a small rolling buffer of sensor data in on-chip RAM, a standard digital thermometer can be transformed into a ``smart'' predictive sensor, providing trend-based insights in remote or shielded environments where network connectivity is non-existent.
+
+However, its primary weakness is \textbf{Persistence Bias}. The model assumes the future is a continuation of a 10-day trend and cannot predict non-linear ``Turning Points,'' such as sudden cold fronts that were not preceded by a measurable trend.
+
 \section{Enterprise Potential and Worldwide Context}
-This project holds significant enterprise potential due to its horizontal scalability and low operational cost. Unlike traditional forecasting services that charge high fees for API calls to proprietary NWP models, this framework can be deployed as a microservice in private cloud environments. 
+This project holds significant enterprise potential due to its horizontal scalability and low operational cost. Unlike traditional forecasting services that charge high fees for API calls to proprietary NWP models, this framework can be deployed as a microservice in private cloud environments. Organizations can process hyper-local data for thousands of specific locations without the computational overhead of global simulations.
 
 On a worldwide scale, tools like \textbf{Google GraphCast} and \textbf{IBM's The Weather Company} are pushing the boundaries of AI-driven meteorology. However, these tools are often inaccessible for smaller enterprises or developing regions due to their high resource requirements. Our framework aligns with the global movement toward \textbf{Explainable AI (XAI)} and \textbf{Edge Computing}, providing a viable alternative for users who require transparency and low-bandwidth solutions in areas where global model resolution remains insufficient.
 
@@ -92,9 +99,10 @@ On a worldwide scale, tools like \textbf{Google GraphCast} and \textbf{IBM's The
 The lightweight and modular nature of this framework allows for a wide array of future applications across various sectors:
 
 \begin{enumerate}
-    \item \textbf{Precision Agriculture:} Small-scale farmers can utilize this tool to predict localized micro-climate shifts. By understanding the linear trend of soil-level humidity, irrigation systems can be optimized to conserve water.
-    \item \textbf{Smart Home Optimization:} The engine can be integrated into IoT-enabled HVAC systems. By predicting the 24-hour temperature trend, a smart thermostat can pre-cool or pre-heat a building more efficiently than reactive sensors.
-    \item \textbf{Renewable Energy Forecasting:} The model can be adapted to predict solar irradiance and wind persistence, allowing micro-grid managers to handle battery storage before a projected decline in clear weather.
+    \item \textbf{Precision Agriculture:} Small-scale farmers can utilize this tool to predict localized micro-climate shifts. By understanding the linear trend of soil-level humidity, irrigation systems can be optimized to conserve water. Standalone sensors placed in the field can independently forecast drought conditions even in areas with no cellular coverage.
+    \item \textbf{Smart Home and Energy Management:} The engine can be integrated into IoT-enabled HVAC systems. By predicting the 24-hour temperature trend, a smart thermostat can pre-cool or pre-heat a building more efficiently than reactive sensors. This reduces the energy spike associated with sudden system adjustments.
+    \item \textbf{Renewable Energy Forecasting:} The model can be adapted to predict solar irradiance and wind persistence, allowing micro-grid managers to handle battery storage before a projected decline in clear weather. This is particularly useful for decentralized grids in rural communities.
+    \item \textbf{Logistics and Cold-Chain Monitoring:} In transport, the model can be embedded into shipping containers to predict internal temperature spikes. This allows for proactive temperature control to preserve sensitive pharmaceuticals or food products during long-haul transit.
 \end{enumerate}
 
 \section{Conclusion}
