@@ -19,7 +19,7 @@
   #align(center + horizon)[
     #text(size: 3em, weight: "bold", style: "italic")[Weather AI Analytics]
     #v(0.5em)
-    #text(size: 1.4em, weight: "bold")[A Localized Forecasting Solution \ for SLR and EWMA Models]
+    #text(size: 1.4em, weight: "bold")[A Localized Weather Forecasting Solution]
   ]
 
   // D. Author Info (Bottom Right)
@@ -28,7 +28,12 @@
     #align(right)[
       By Artsiom Hancharenka \
       Nil Dvorakovskiy \
-      #datetime.today().display()
+      FAMCS BSU, group 3 
+    ]
+  ]
+  #place(bottom + center)[
+    #align(center)[
+      Minsk 2026
     ]
   ]
 ]
@@ -43,76 +48,78 @@
 // SLIDE: MOTIVATION (Revised per instructions & main.pdf) [cite: 89, 90, 91, 92]
 == Motivation
 
-- *Global Context:* Demand for precise, localized weather information has never been higher.
+- *Global Context:* Demand for precise, localized weather information.
 
-- *The Problem:* Domination of resource-heavy Numerical Weather Prediction models.
+- *The Problem:* Domination of resource-heavy models.
 - *Objective:* Lightweight, computationally efficient solution.
 
 // SLIDE: THEORETICAL FOUNDATION (Based on LuminaBLE Slide 4) [cite: 9, 42, 98]
 == Theoretical Foundation
 
-The study addresses distinct temporal behaviors based on two scientific pillars:
+
+#text(size: 30pt)[Two scientific pillars:]
 
 #linebreak(justify: true)
 
 - *Persistence and Momentum Theory:* Atmosphere as a fluid system.
 
-- *Stochastic Volatility:* Sensitive to immediate localized fluctuations.
+- *Chaotic Volatility:* Sensitive to immediate localized fluctuations.
 
+== Objective
+#grid(
+  columns: (1fr, 1.2fr), // Text takes 1 part, Image takes 1.2 parts
+  gutter: 20pt,
+  align: horizon,       
+  [
+    #set text(size: 1.5em) 
+    - *The goal:* Prove the correctness of algorithm.
+  ],
+  figure(
+    image("proof.jpeg", width: 100%),
+  )
+)
 
-// SLIDE: MATHEMATICAL CORE (Based on LuminaBLE Slide 5) [cite: 11, 44, 121]
-== The Mathematical Core
-
-Optimization for specific physical characteristics.
-
-- *Temperature Trends (SLR):* Modeled using Linear Least Squares to minimize the Residual Sum of Squares (RSS).
-
-- *Formula:* $m = (n sum(x_i y_i) - sum x_i sum y_i) / (n sum x_i^2 - (sum x_i)^2)$.
-
-- *Humidity Dynamics (EWMA):* Recursive weighted average.
-
-- *Formula:* $S_t = alpha dot Y_t + (1 - alpha) dot S_(t-1)$.
-
+// instead of slide with math core, remove forumulas,  change topic for aim : develop website to check and prove the Theory
+// add practical usage
 
 // SLIDE: SYSTEM ARCHITECTURE (Based on LuminaBLE Slide 6) [cite: 13, 53, 107]
 == System Architecture
-
-A modular full-stack architecture ensuring heavy mathematical lifting remains server-side.
 
 - *Backend:* Flask.
 - *Frontend:* SPA with dynamic elements.
 - *Data Orchestration:* Open-Meteo API for historical training sets.
 
-// SLIDE: TECHNICAL IMPLEMENTATION (Based on LuminaBLE Slide 7) [cite: 15, 59, 135]
-== Technical Implementation
+== Figures
+ #figure( image("lodz.png", width: 80%))
 
-- *Physical Clamping:* Outputs remain within physical boundaries.
-- *Heuristic Thresholding:* A $0.3"mm"$ floor filters.
+== Challenges: Dealing with Outliers
+#figure( image("regression.png", width: 80%))
 
-- *Validation Framework:* A "Trust Score" $1^degree C$ of error equals $10%$ accuracy.
 
 // SLIDE: CHALLENGES & SOLUTIONS (Based on LuminaBLE Slide 8) [cite: 68, 149]
-== Challenges & Solutions
-
-- *Persistence Bias:* Future is a continuation of a trend.
-
-- *Portability Solution:* Rely on simple arithmetic, allowing deployment on low-power 8-bit microcomputers.
-- *Edge Intelligence:* Local forecasting autonomously without internet connectivity.
+#grid(
+  columns: (1.5fr, 1fr), // Text gets more space than the image
+  gutter: 15pt,          // Space between text and image
+  align: horizon,        // Vertically centers both elements
+  [
+    - *Portability Solution:* Deployment on low-power 8-bit microcomputers.
+    #v(1em) // Adds spacing between the bullets
+    - *Edge Intelligence:* Local forecasting without Internet.
+  ],
+  figure(
+    image("thermometer.png", width: 100%),
+  )
+)
 
 // SLIDE: CONCLUSION & FUTURE OUTLOOK (Based on LuminaBLE Slide 9) [cite: 16, 73, 178]
 == Conclusion & Future Outlook
 
 - *Summary:* Verifiable, low-latency alternative.
 
-- *Future Work:* Barometric pressure trends to detect non-linear atmospheric shifts.
-- *Applications:* Expanding into precision agriculture, smart HVAC management, and renewable energy forecasting.
+- *Future Work:* Thermometer prototypes.
 
-// THANK YOU SLIDE (Based on LuminaBLE Slide 10) [cite: 74]
-#focus-slide[
-  Thank you for your attention!
-  
-  _Advancing Localized and Explainable AI Analytics._
-]
+- *Applications:*  Technology utilizing in developing countries. 
+
   
 == Links & References
 
