@@ -11,11 +11,14 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{xcolor}
+\usepackage{setspace}
 
+% Page layout - standard margins with 14pt text and 1.5 spacing
 \geometry{margin=1in}
+\onehalfspacing 
 
 % --- Document Information ---
-\title{Weather AI Analytics: A Lightweight Framework for Localized Forecasting via Linear Regression and Exponentially Weighted Moving Averages}
+\title{\textbf{Weather AI Analytics: A Lightweight Framework for Localized Forecasting via Linear Regression and Exponentially Weighted Moving Averages}}
 \author{Artsiom Hancharenka, Nil Dvorakovskiy \\ \small BSU FAMCS, $3^{rd}$ group}
 \date{} 
 
@@ -23,90 +26,107 @@
 
 \maketitle
 
-\begin{abstract}
+\noindent \textbf{Abstract} \\
 This paper presents a computationally efficient approach to localized meteorological prediction. By shifting away from high-resource numerical models and opaque neural networks, we propose a hybrid system utilizing Simple Linear Regression (SLR) and Exponentially Weighted Moving Averages (EWMA). The system is designed to provide explainable analytics for temperature, humidity, and precipitation. Unlike deep learning models that require vast datasets, this ``Small Data'' approach utilizes a 10-day historical window to project short-term trends. Furthermore, the inclusion of an automated validation framework allows for real-time accuracy assessment, bridging the gap between complex global models and user-centric environmental monitoring.
-\end{abstract}
 
-\textbf{Keywords:} \\
-Explainable AI (XAI), Persistence Modeling, Small Data, Full-Stack Analytics, Meteorological Heuristics, Linear Least Squares, Time-Series Forecasting.
+\bigskip
 
-\section{Motivation}
-In an era of increasing climatic volatility, the demand for precise, localized weather information has never been higher. However, contemporary meteorological forecasting remains dominated by two extremes: high-level Numerical Weather Prediction (NWP) models that require massive supercomputing resources, and consumer-grade applications that offer data without transparency. There is a significant technological gap for a ``middle-ground'' solution—one that provides lightweight, computationally efficient, and explainable analytics directly to the end-user.
+\noindent \textbf{Keywords:} \\
+Explainable AI (XAI), Edge Computing, Offline Analytics, Small Data, Meteorological Heuristics, Linear Least Squares, Time-Series Forecasting.
 
-The motivation behind this project is to democratize the predictive process by shifting away from ``black-box'' artificial intelligence in favor of transparent statistical heuristics. By utilizing SLR and EWMA, this research proves that meaningful short-term forecasts can be generated using minimal historical datasets without specialized hardware. Furthermore, the framework empowers users to retrospectively validate model accuracy against historical ground truths, fostering scientific literacy in personal environmental monitoring.
+\newpage
 
-\section{Theoretical Background}
-The study delineates a bifurcated mathematical framework designed to address the distinct temporal behaviors of meteorological variables based on two scientific pillars:
+\noindent The modern landscape of meteorological forecasting is currently undergoing a massive shift toward Large Language Models (LLMs) and deep neural networks, yet these technologies introduce a dangerous dependency on constant internet connectivity and massive remote databases. While models like Google’s GraphCast or various GPT-based weather interfaces show impressive pattern recognition, they function essentially as ``cloud-tethered'' entities. They require a persistent, high-speed connection to reach data centers housing billions of parameters. Our research is motivated by the direct rejection of this paradigm. We believe that a weather forecasting tool is most critical precisely when the infrastructure fails—during storms, in remote agricultural zones, or in developing nations where internet stability is a luxury. Our goal is to create a product that does not rely on external databases or cloud computing, but rather functions as a standalone mathematical engine capable of running on the ``edge.''
 
-\begin{enumerate}
-    \item \textbf{Persistence and Momentum Theory:} In short-term meteorology, we evolve the standard persistence method by incorporating \textit{thermal momentum}. We treat the atmosphere as a fluid system with specific heat capacity and thermal inertia. If a localized environment has shown a consistent cooling trend over a week, physical energy transfer mechanisms suggest a continuation of that vector. SLR acts as the mathematical tool to quantify this momentum, allowing us to project the most likely 24-hour state.
-    \item \textbf{Stochastic Volatility and Memory Decay:} While temperature changes are governed by large-scale masses, relative humidity is a high-frequency variable sensitive to immediate localized fluctuations. Humidity exhibits ``short memory,'' requiring a model that prioritizes the most recent observations. The implementation of EWMA allows the system to prioritize recent data while mathematically ``forgetting'' distant history via an exponential decay function.
-\end{enumerate}
+\medskip
 
-\section{System Architecture and Data Integration}
-The platform is built upon a modular full-stack architecture. The system architecture ensures heavy mathematical lifting remains server-side, while the client-side remains reactive.
+\noindent In an era of increasing climatic volatility, the demand for precise, localized weather information has never been higher, yet contemporary solutions frequently act as black boxes. Most consumer-grade applications present a simple icon and a percentage without revealing the age of the data or the mathematical logic behind the prediction. This lack of transparency prevents users from understanding the physical reality of their environment. By utilizing Simple Linear Regression (SLR) and Exponentially Weighted Moving Averages (EWMA), we return the power of prediction to the local device. This allows for a ``Small Data'' approach where the only requirement is a tiny rolling buffer of the last ten days of data, which can be stored in the temporary RAM of a simple microcontroller rather than a massive SQL database.
 
-\subsection{Data Integration and API Orchestration}
-The integrity of the forecasting engine relies on the \textbf{Open-Meteo API} ecosystem. The system translates natural language city names into precise GPS coordinates via a Geocoding layer. Once secured, the system retrieves a 10-day historical window. This training set provides the context for the SLR and EWMA algorithms. The archive API is preferred over real-time sensors to ensure a consistent, quality-controlled dataset for trend initialization.
+\medskip
 
-\subsection{Backend Processing and Frontend UX}
-The backend, developed with \textbf{Flask}, manages request orchestration, parses JSON payloads, and executes the mathematical logic. The \textbf{Frontend} is an asynchronous Single Page Application (SPA). It uses a card-based layout where metrics are represented through dynamic CSS3 gradients. The ``Algorithm Test'' mode creates a closed-loop system where users validate the AI's predictive logic against actual historical records.
+\noindent The theoretical value of this project lies in the formalization of Persistence and Momentum Theory within a lightweight statistical framework. In short-term meteorology, we evolve the standard persistence method—which assumes tomorrow will be like today—by incorporating thermal momentum. We treat the atmosphere as a fluid system with specific heat capacity and thermal inertia. If a localized environment has shown a consistent cooling trend over several days, physical energy transfer mechanisms suggest a continuation of that vector. SLR acts as the mathematical tool to quantify this momentum, allowing us to project the most likely 24-hour state without needing to simulate the entire global atmosphere.
 
-\section{Mathematical Framework}
-The predictive capability is categorized into four distinct mathematical components optimized for the physical characteristics of the target variable.
+\medskip
 
-\subsection{Linear Least Squares (LLS) for Temperature Trends}
-Temperature is modeled using the Least Squares Method to minimize the Residual Sum of Squares (RSS):
+\noindent While temperature changes are governed by large-scale masses, relative humidity is a high-frequency variable sensitive to immediate localized fluctuations. Humidity exhibits what we term ``short memory,'' requiring a model that prioritizes the most recent observations over distant historical data. The implementation of EWMA allows the system to prioritize recent shifts while mathematically ``forgetting'' distant history via an exponential decay function. This provides a level of reactivity that LLMs often lack, as they tend to over-smooth data based on global averages rather than reacting to a local, sudden moisture spike.
+\noindent When visualizing these meteorological trends, sudden cataclysms---such
+as flash floods, microbursts, or rapid cyclogenesis---manifest on the analytical
+graphs as sharp, non-linear discontinuities that violate the principle of
+persistence. In a standard linear least squares model, a single extreme outlier
+caused by a cataclysmic event acts as a high-leverage point, disproportionately
+tilting the regression slope (mm). If a localized storm produces a massive precipitation spike on the ninth day
+of a ten-day window, the SLR engine interprets this not as a temporary anomaly,
+but as a steepening of the overall vector. This results in a ``predictive
+overshoot,'' where the model projects continued extreme conditions for the
+eleventh day, even if the physical cataclysm has already dissipated. This
+mathematical sensitivity highlights the inherent tension between trend-tracking
+and outlier-resistance in small-data environments.
+\noindent The analysis of these deviations provides critical insights into the
+limitations of statistical heuristics compared to high-resource neural networks.
+While an LLM might categorize a sudden deviation as sensor noise'' and smooth it
+out based on global climatological averages, our EWMA-based system acknowledges
+the spike as a legitimate state change. However, because EWMA relies on a
+recursive decay function, a cataclysmic shift creates a recovery lag'' on the
+graph. Even after the weather stabilizes, the prediction line remains anchored
+to the tail-end of the cataclysm until enough new, stable data points are
+ingested to overwrite the exponential memory of the event. On the user interface,
+this appears as a widening gap between the projected trend and the actual
+ground truth, which is immediately reflected in the Trust Score.
+\noindent Ultimately, the alteration of the whole prediction by these cataclysms
+serves as a diagnostic tool for the end-user. By observing a collapse in
+accuracy following a sharp graphical deviation, the user is alerted to the fact
+that the atmosphere has shifted from a state of momentum to a state of chaos.
+This realization is vital for edge intelligence; it signals that the current
+linear assumptions are no longer valid and that the user should prioritize
+immediate sensor readings over the calculated 24-hour projection. In this way,
+the model does not just predict the weather—it identifies its own mathematical
+breaking points, providing a layer of situational awareness that remains
+functional and transparent even when the most sophisticated global models are
+unreachable.
+\medskip
+\noindent The system architecture is designed to be highly modular, ensuring that the core mathematical engine can be stripped of its web-based shell and deployed on low-power hardware. Currently, the platform uses a Flask backend to manage request orchestration and parse JSON payloads from the Open-Meteo API. However, because the forecasting logic is purely arithmetic, the backend can be entirely bypassed in a production ``Edge'' environment. In such a scenario, the system would ingest data directly from hardware sensors (thermometers and hygrometers) and process the SLR and EWMA formulas in real-time on a chip with as little as 2KB of RAM. This makes the project uniquely suited for standalone IoT devices that function in ``Offline-First'' environments.
+
+\medskip
+
+\noindent The integrity of the forecasting engine is currently validated through a Geocoding layer and a 10-day historical window retrieved via API. This training set provides the necessary context for the SLR and EWMA algorithms to initialize. While many AI models require years of historical data to ``train,'' our heuristic approach requires only 240 hourly data points. This efficiency is what allows the system to remain database-free; once the prediction is made, the historical data can be discarded or overwritten, keeping the storage footprint at a constant minimum. This is a radical departure from LLM-based weather services that must maintain petabytes of historical records to remain accurate.
+
+\medskip
+
+\noindent The mathematical framework for temperature is centered on the Least Squares Method to minimize the Residual Sum of Squares. By calculating the linear trend of temperature, we identify the slope ($m$) and intercept ($b$) of the atmospheric energy state:
 \begin{equation}
 m = \frac{n\sum(x_iy_i) - \sum x_i \sum y_i}{n\sum x_i^2 - (\sum x_i)^2} \quad , \quad b = \frac{\sum y_i - m \sum x_i}{n}
 \end{equation}
-Evaluating $y = m(n) + b$ provides the projected value for the subsequent day.
+Evaluating $y = m(n) + b$ provides the projected value for the subsequent day. This calculation is computationally trivial, requiring only basic floating-point arithmetic, which is why it can run on a digital thermometer's internal logic gate without an internet connection.
 
-\subsection{Exponentially Weighted Moving Average (EWMA) for Humidity}
-To prioritize recent shifts, we implement a recursive EWMA:
+\medskip
+
+\noindent To address the volatility of moisture and precipitation, we implement the recursive EWMA formula with a specific decay constant. By setting $\alpha = 0.7$, we ensure that 70\% of the prediction is based on the most recent 24 hours:
 \begin{equation}
 S_t = \alpha \cdot Y_t + (1 - \alpha) \cdot S_{t-1}
 \end{equation}
-With $\alpha = 0.7$, 70\% of the prediction is based on the most recent 24 hours, ensuring the model reacts quickly to incoming fronts.
-
-\subsection{Heuristic Thresholding and Physical Clamping}
-Deterministic mathematical models often ignore physical boundaries. We implement a constraint layer:
+This ensures the model reacts quickly to incoming weather fronts. Furthermore, we implement a physical constraint layer to prevent the mathematical model from predicting impossible states, such as negative humidity or negative rainfall:
 \begin{equation}
 H_{final} = \max(0, \min(100, H_{pred})) \quad , \quad P = \{0 \text{ if } P_{pred} < 0.3, \text{ else } P_{pred}\}
 \end{equation}
-Linear models can mathematically produce negative humidity or negative rain, which are physical impossibilities. Clamping ensures the output remains within the $[0, 100]$ range for humidity. Furthermore, the 0.3mm rain threshold addresses the problem of meteorological noise. SLR may project negligible precipitation values based on minor downward moisture trends; applying this floor filters false positives, ensuring the AI only predicts rain when the mathematical trend suggests measurable precipitation.
+These heuristics bridge the gap between pure mathematics and physical reality, ensuring the AI output remains within the bounds of Earth's atmosphere.
 
-\subsection{Quantitative Accuracy and User Trust Metric}
-Validation is performed via a customized linear penalty function:
-\begin{equation}
-A = \max(0, 100 - |T_{pred} - T_{actual}| \times 10)
-\end{equation}
-While scientific models often use Mean Absolute Error, we employ a ``Trust Score.'' A multiplier of 10 means every $1^\circ\text{C}$ of error reduces the AI's score by 10\%. This provides a clear benchmark: a $2^\circ\text{C}$ error is 80\% Accuracy (Good), whereas a $5^\circ\text{C}$ error results in 50\% Accuracy, signaling a failure of the linear trend to capture that day's atmospheric shifts.
+%\newpage
 
-\section{Pros and Cons Review}
-The framework succeeds in offering an \textbf{explainable} and \textbf{low-latency} alternative to traditional modeling. Its strength lies in its transparency; users can trace the linear slope back to historical data. 
+\noindent A primary objective of this research is to foster scientific literacy through a customized linear penalty function that acts as a Trust Score. While scientific models often use Mean Absolute Error, we employ a metric that users can intuitively understand: $A = \max(0, 100 - |T_{pred} - T_{actual}| \times 10)$. If the AI is off by $2^\circ\text{C}$, the accuracy is 80\%. If it is off by $5^\circ\text{C}$, it drops to 50\%, signaling that a non-linear event occurred—such as a sudden cold front—that the linear trend could not capture. This transparency encourages users to look for the physical causes of model failure rather than blindly trusting an algorithm.
 
-A significant advantage of this technology is its \textbf{High Portability and Edge Intelligence}. Because the algorithms rely on simple arithmetic rather than heavy matrix operations or GPU-intensive libraries, they can be deployed directly on low-power, 8-bit or 16-bit microcomputers (such as thermometer chips or Arduino-based controllers). These standalone devices can perform local forecasting autonomously without any internet connection. By storing a small rolling buffer of sensor data in on-chip RAM, a standard digital thermometer can be transformed into a ``smart'' predictive sensor, providing trend-based insights in remote or shielded environments where network connectivity is non-existent.
+\medskip
 
-However, its primary weakness is \textbf{Persistence Bias}. The model assumes the future is a continuation of a 10-day trend and cannot predict non-linear ``Turning Points,'' such as sudden cold fronts that were not preceded by a measurable trend.
+\noindent This framework holds significant potential for humanitarian and economic impact in developing countries where internet bandwidth is a major constraint. In many parts of the world, small-scale farmers lose crops because they cannot access localized weather forecasts due to the high cost of data or the lack of cellular coverage. By deploying this algorithm on a \$5 microcontroller connected to a simple sensor, a farmer can have a standalone weather station that predicts frost or heatwaves with high local accuracy. This is a far more sustainable solution than current trends that require a smartphone and a subscription to a cloud-based AI service.
 
-\section{Enterprise Potential and Worldwide Context}
-This project holds significant enterprise potential due to its horizontal scalability and low operational cost. Unlike traditional forecasting services that charge high fees for API calls to proprietary NWP models, this framework can be deployed as a microservice in private cloud environments. Organizations can process hyper-local data for thousands of specific locations without the computational overhead of global simulations.
+\medskip
 
-On a worldwide scale, tools like \textbf{Google GraphCast} and \textbf{IBM's The Weather Company} are pushing the boundaries of AI-driven meteorology. However, these tools are often inaccessible for smaller enterprises or developing regions due to their high resource requirements. Our framework aligns with the global movement toward \textbf{Explainable AI (XAI)} and \textbf{Edge Computing}, providing a viable alternative for users who require transparency and low-bandwidth solutions in areas where global model resolution remains insufficient.
+\noindent From an enterprise perspective, the horizontal scalability and low operational cost of this system make it an ideal microservice for private cloud environments. Organizations can process hyper-local data for thousands of specific locations—such as individual shipping containers or cell towers—without the computational overhead of global simulations. Unlike traditional forecasting services that charge per API call, our database-free engine can be embedded directly into hardware, eliminating recurring costs and data privacy concerns, as no data ever needs to leave the local network.
 
-\section{Future Applications}
-The lightweight and modular nature of this framework allows for a wide array of future applications across various sectors:
+\medskip
 
-\begin{enumerate}
-    \item \textbf{Precision Agriculture:} Small-scale farmers can utilize this tool to predict localized micro-climate shifts. By understanding the linear trend of soil-level humidity, irrigation systems can be optimized to conserve water. Standalone sensors placed in the field can independently forecast drought conditions even in areas with no cellular coverage.
-    \item \textbf{Smart Home and Energy Management:} The engine can be integrated into IoT-enabled HVAC systems. By predicting the 24-hour temperature trend, a smart thermostat can pre-cool or pre-heat a building more efficiently than reactive sensors. This reduces the energy spike associated with sudden system adjustments.
-    \item \textbf{Renewable Energy Forecasting:} The model can be adapted to predict solar irradiance and wind persistence, allowing micro-grid managers to handle battery storage before a projected decline in clear weather. This is particularly useful for decentralized grids in rural communities.
-    \item \textbf{Logistics and Cold-Chain Monitoring:} In transport, the model can be embedded into shipping containers to predict internal temperature spikes. This allows for proactive temperature control to preserve sensitive pharmaceuticals or food products during long-haul transit.
-\end{enumerate}
+\noindent The future of this framework involves the integration of barometric pressure trends to improve the detection of non-linear weather shifts. While the current linear model is highly effective for steady trends, the addition of pressure change rates will allow the system to predict the ``Turning Points'' it currently misses. By maintaining its commitment to lightweight, offline, and explainable logic, the Weather AI Analytics engine serves as a foundation for a new generation of resilient, decentralized environmental monitoring tools that prioritize user autonomy over cloud dependency.
 
-\section{Conclusion}
-The Weather AI Analytics engine serves as a foundation for hybrid modeling. By combining deterministic momentum with adaptive weighting and a transparent verification loop, the system offers a verifiable alternative to traditional forecasting. Future iterations will incorporate barometric pressure trends to improve the detection of non-linear weather shifts.
+\bigskip
 
 \begin{thebibliography}{9}
 \bibitem{openmeteo}
