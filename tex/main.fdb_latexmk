@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1769123196.28611 "/home/artsiomh/Weather-forecasting/tex/main.tex" "main.pdf" "main" 1769123198.93798 0
+["pdflatex"] 1769125035.81749 "/home/artsiomh/Weather-forecasting/tex/main.tex" "main.pdf" "main" 1769125038.72064 0
   "/etc/texmf/web2c/texmf.cnf" 1765638353.98939 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/artsiomh/Weather-forecasting/tex/main.tex" 1769123192.68026 13740 911f9370eee890fd4b84d6bb754b5f41 ""
+  "/home/artsiomh/Weather-forecasting/tex/main.tex" 1769125035.05635 24475 ebf3da2a9c51c1db42885dda9e8670dd ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1440.tfm" 1136768653 1536 3290a75021d32d016616fe527bc9884c ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -100,9 +100,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1765638391 5467255 9a64d1b40e0b893fc5588ecce9d8accf ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1765638599 3348914 6a5ed78f10416ebafc264a0374f42238 ""
-  "main.aux" 1769123198.53626 227 20d26105592585ddc31eb2330abe3450 "pdflatex"
-  "main.out" 1769123198.01626 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1769123192.68026 13740 911f9370eee890fd4b84d6bb754b5f41 ""
+  "main.aux" 1769125038.46035 228 b8e4a453ab223ca3ee73d5869b405bcf "pdflatex"
+  "main.out" 1769125038.20835 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1769125035.05635 24475 ebf3da2a9c51c1db42885dda9e8670dd ""
   (generated)
   "main.aux"
   "main.log"
